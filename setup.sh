@@ -50,5 +50,10 @@ fi
 export GOPATH=$HOME/go
 go get github.com/pachyderm/pachyderm
 cd $GOPATH/src/github.com/pachyderm/pachyderm
+
+# Install pachctl
+curl -o /tmp/pachctl.deb -L https://pachyderm.io/pachctl.deb && sudo dpkg -i /tmp/pachctl.deb
+
+# Add user to docker group, and tell them to logout and log in, to reevaluate group memberships
 sudo usermod -aG docker $USER
 echo "$USER has been added to the Docker group. Run 'logout' and log back in to run docker commands'
