@@ -49,5 +49,5 @@ if [[ ! ( -d $HOME/go ) ]]; then
 fi
 export GOPATH=$HOME/go
 go get github.com/pachyderm/pachyderm
-cd $GOPATH/github.com/pachyderm/pachyderm
+cd $GOPATH/src/github.com/pachyderm/pachyderm
 go get ./...
