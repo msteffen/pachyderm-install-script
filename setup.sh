@@ -50,4 +50,4 @@ fi
 export GOPATH=$HOME/go
 go get github.com/pachyderm/pachyderm
 cd $GOPATH/src/github.com/pachyderm/pachyderm
-go get ./...
+make deps
