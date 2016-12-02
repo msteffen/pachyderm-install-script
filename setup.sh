@@ -3,7 +3,6 @@
 sudo apt install -y git make jq apt-transport-https ca-certificates dnsutils
 
 # Install docker
-sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
 sudo apt install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 sudo apt install -y docker-enginer
 
