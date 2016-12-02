@@ -1,7 +1,14 @@
 #!/bin/bash
+
+# Install packages
 sudo apt update
 sudo apt install -y git make jq dnsutils golang
 sudo apt upgrade -y
+
+# Install environment variables
+export GOPATH=$HOME/go
+export PATH=$HOME/go/bin:$PATH >>$HOME/.bashrc
+echo -e '\nexport GOPATH=$HOME/go\nexport PATH=$HOME/go/bin:$PATH' >>$HOME/.bashrc
 
 # Install docker
 sudo apt install -y apt-transport-https ca-certificates
@@ -48,15 +55,10 @@ if [[ ! ( -d $HOME/go ) ]]; then
   mkdir $HOME/go
 fi
 go get github.com/pachyderm/pachyderm
-cd $GOPATH/src/github.com/pachyderm/pachyderm
-
-# Install environment variables
-export GOPATH=$HOME/go
-export PATH=$HOME/go/bin:$PATH >>$HOME/.bashrc
-echo -e '\nexport GOPATH=$HOME/go\nexport PATH=$HOME/go/bin:$PATH' >>$HOME/.bashrc
 
 # Install pachctl
 make install
+cd $GOPATH/src/github.com/pachyderm/pachyderm
 
 # Add user to docker group, and tell them to logout and log in, to reevaluate group memberships
 sudo usermod -aG docker $USER
