@@ -47,12 +47,16 @@ echo -e "remember to run:\n  export GOPATH=\$HOME/go"
 if [[ ! ( -d $HOME/go ) ]]; then
   mkdir $HOME/go
 fi
-export GOPATH=$HOME/go
 go get github.com/pachyderm/pachyderm
 cd $GOPATH/src/github.com/pachyderm/pachyderm
 
 # Install pachctl
-curl -o /tmp/pachctl.deb -L https://pachyderm.io/pachctl.deb && sudo dpkg -i /tmp/pachctl.deb
+make install
+
+# Install environment variables
+export GOPATH=$HOME/go
+export PATH=$HOME/go/bin:$PATH >>$HOME/.bashrc
+echo -e '\nexport GOPATH=$HOME/go\nexport PATH=$HOME/go/bin:$PATH' >>$HOME/.bashrc
 
 # Add user to docker group, and tell them to logout and log in, to reevaluate group memberships
 sudo usermod -aG docker $USER
