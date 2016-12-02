@@ -34,7 +34,7 @@ sudo mv /tmp/kubectl.new/kubernetes/client/bin/kubectl /usr/local/bin/kubectl
 sudo chmod +x /usr/local/bin/kubectl
 
 echo -e "remember to run:\n  export GOPATH=\$HOME/go"
-if [[ ! \( -d $HOME/go \) ]];
+if [[ ! ( -d $HOME/go ) ]];
   mkdir $HOME/go
 fi
 export GOPATH=$HOME/go
