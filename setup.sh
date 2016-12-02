@@ -1,8 +1,15 @@
 #!/bin/bash
-
-sudo apt install -y git make jq apt-transport-https ca-certificates dnsutils
+sudo apt update
+sudo apt install -y git make jq dnsutils
 
 # Install docker
+sudo apt install -y apt-transport-https ca-certificates
+sudo apt-key adv \
+  --keyserver hkp://ha.pool.sks-keyservers.net:80 \
+  --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" \
+  | sudo tee /etc/apt/sources.list.d/docker.list
+sudo apt update
 sudo apt install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 sudo apt install -y docker-engine
 sudo service docker start
@@ -35,7 +42,7 @@ sudo mv /tmp/kubectl.new/kubernetes/client/bin/kubectl /usr/local/bin/kubectl
 sudo chmod +x /usr/local/bin/kubectl
 
 echo -e "remember to run:\n  export GOPATH=\$HOME/go"
-if [[ ! ( -d $HOME/go ) ]];
+if [[ ! ( -d $HOME/go ) ]]; then
   mkdir $HOME/go
 fi
 export GOPATH=$HOME/go
