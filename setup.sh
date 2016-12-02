@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt install -y git make jq dnsutils
+sudo apt install -y git make jq dnsutils golang
 sudo apt upgrade -y
 
 # Install docker
