@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt install -y git make jq dnsutils
+sudo apt upgrade -y
 
 # Install docker
 sudo apt install -y apt-transport-https ca-certificates
@@ -10,6 +11,7 @@ sudo apt-key adv \
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" \
   | sudo tee /etc/apt/sources.list.d/docker.list
 sudo apt update
+sudo apt upgrade -y
 sudo apt install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 sudo apt install -y docker-engine
 sudo service docker start
