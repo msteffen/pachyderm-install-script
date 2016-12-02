@@ -50,13 +50,13 @@ fi
 go get github.com/pachyderm/pachyderm
 cd $GOPATH/src/github.com/pachyderm/pachyderm
 
-# Install pachctl
-make install
-
 # Install environment variables
 export GOPATH=$HOME/go
 export PATH=$HOME/go/bin:$PATH >>$HOME/.bashrc
 echo -e '\nexport GOPATH=$HOME/go\nexport PATH=$HOME/go/bin:$PATH' >>$HOME/.bashrc
+
+# Install pachctl
+make install
 
 # Add user to docker group, and tell them to logout and log in, to reevaluate group memberships
 sudo usermod -aG docker $USER
