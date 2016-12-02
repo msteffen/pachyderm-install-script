@@ -33,3 +33,12 @@ run_loud tar -xzf /tmp/kubectl.new.tar.gz -C /tmp/kubectl.new
 echo sudo mv /tmp/kubectl.new/kubernetes/client/bin/kubectl /usr/local/bin/kubectl
 sudo mv /tmp/kubectl.new/kubernetes/client/bin/kubectl /usr/local/bin/kubectl
 sudo chmod +x /usr/local/bin/kubectl
+
+echo -e "remember to run:\n  export GOPATH=\$HOME/go"
+if [[ ! \( -d $HOME/go \) ]];
+  mkdir $HOME/go
+fi
+export GOPATH=$HOME/go
+go get github.com/pachyderm/pachyderm
+cd $GOPATH/github.com/pachyderm/pachyderm
+go get ./...
