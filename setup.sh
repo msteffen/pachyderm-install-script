@@ -4,7 +4,8 @@ sudo apt install -y git make jq apt-transport-https ca-certificates dnsutils
 
 # Install docker
 sudo apt install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
-sudo apt install -y docker-enginer
+sudo apt install -y docker-engine
+sudo service docker start
 
 function run_loud {
   echo "${@}"
