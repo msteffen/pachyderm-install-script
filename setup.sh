@@ -50,4 +50,5 @@ fi
 export GOPATH=$HOME/go
 go get github.com/pachyderm/pachyderm
 cd $GOPATH/src/github.com/pachyderm/pachyderm
-make deps
+sudo usermod -aG docker $USER
+echo "$USER has been added to the Docker group. Run 'logout' and log back in to run docker commands'
