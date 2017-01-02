@@ -2,8 +2,21 @@
 
 # Install packages
 sudo apt update
-sudo apt install -y git make jq dnsutils golang
+sudo apt install -y git make jq dnsutils
 sudo apt upgrade -y
+
+# Install recent version of go
+os=$( uname -o )
+[[ "${os}" == "GNU/Linux" ]] && os="linux"
+
+golang_version="$( env | grep GOLANG_VERSION )"
+[[ -z "${golang_version}" ]] && golang_version=1.7.4
+
+arch="$( uname -m )"
+[[ "${arch}" == "x86_64" ]] && arch="amd64"
+
+curl -O "https://storage.googleapis.com/golang/go${golang_version}.${os}-${arch}.tar.gz"
+sudo tar -C /usr/local -xzf go${golang_version}.${os}-${arch}.tar.gz
 
 # Install environment variables
 export GOPATH=$HOME/go
