@@ -17,6 +17,7 @@ arch="$( uname -m )"
 
 curl -O "https://storage.googleapis.com/golang/go${golang_version}.${os}-${arch}.tar.gz"
 sudo tar -C /usr/local -xzf go${golang_version}.${os}-${arch}.tar.gz
+rm go${golang_version}.${os}-${arch}.tar.gz
 
 # Install environment variables
 export GOPATH=$HOME/go
