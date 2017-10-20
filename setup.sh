@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # Install packages
 sudo apt update
 sudo apt install -y git make jq dnsutils
@@ -9,20 +11,22 @@ sudo apt upgrade -y
 os=$( uname -o )
 [[ "${os}" == "GNU/Linux" ]] && os="linux"
 
-golang_version="$( env | grep GOLANG_VERSION )"
-[[ -z "${golang_version}" ]] && golang_version=1.7.4
+golang_version="$( env | grep GOLANG_VERSION | cut -d= -f2 )"
+[[ -z "${golang_version}" ]] && golang_version=1.9.1
 
 arch="$( uname -m )"
 [[ "${arch}" == "x86_64" ]] && arch="amd64"
 
-curl -O "https://storage.googleapis.com/golang/go${golang_version}.${os}-${arch}.tar.gz"
-sudo tar -C /usr/local -xzf go${golang_version}.${os}-${arch}.tar.gz
+wget "https://storage.googleapis.com/golang/go${golang_version}.${os}-${arch}.tar.gz"
+sudo mkdir /usr/local/go
+sudo tar -C /usr/local/go -xzf go${golang_version}.${os}-${arch}.tar.gz
 rm go${golang_version}.${os}-${arch}.tar.gz
 
 # Install environment variables
-export GOPATH=$HOME/go
-export PATH=$HOME/go/bin:$PATH >>$HOME/.bashrc
-echo -e '\nexport GOPATH=$HOME/go\nexport PATH=$HOME/go/bin:$PATH' >>$HOME/.bashrc
+export GOPATH=${HOME}/go
+echo -e '\nGOPATH=${HOME}/go' >>$HOME/.bashrc
+export PATH=${GOPATH}/bin:/usr/local/go/bin:${PATH}
+echo -e '\n${GOPATH}/bin:/usr/local/go/bin:${PATH}' >>$HOME/.bashrc
 
 # Install docker
 sudo apt install -y apt-transport-https ca-certificates
