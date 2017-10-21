@@ -24,9 +24,13 @@ rm go${golang_version}.${os}-${arch}.tar.gz
 
 # Install environment variables
 export GOPATH=${HOME}/go
-echo -e '\nexport GOPATH=${HOME}/go' >>$HOME/.bashrc
+cat ${HOME}/.bashrc | grep -q GOPATH || {
+  echo -e '\n[[ "${GOPATH}" =~ /home/.*/go ]] || export GOPATH=${HOME}/go' >>$HOME/.bashrc
+}
 export PATH=${GOPATH}/bin:/usr/local/go/bin:${PATH}
-echo -e 'export PATH=${GOPATH}/bin:/usr/local/go/bin:${PATH}' >>$HOME/.bashrc
+cat ${HOME}/.bashrc | grep -q /usr/local/go/bin || {
+  echo -e '[[ "${PATH}" =~ /usr/local/go/bin ]] || export PATH=${GOPATH}/bin:/usr/local/go/bin:${PATH}' >>$HOME/.bashrc
+}
 
 # Install docker
 sudo apt install -y apt-transport-https ca-certificates
