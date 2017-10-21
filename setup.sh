@@ -18,8 +18,7 @@ arch="$( uname -m )"
 [[ "${arch}" == "x86_64" ]] && arch="amd64"
 
 wget "https://storage.googleapis.com/golang/go${golang_version}.${os}-${arch}.tar.gz"
-sudo mkdir /usr/local/go
-sudo tar -C /usr/local/go -xzf go${golang_version}.${os}-${arch}.tar.gz
+sudo tar -C /usr/local -xzf go${golang_version}.${os}-${arch}.tar.gz
 rm go${golang_version}.${os}-${arch}.tar.gz
 
 # Install environment variables
